@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" />
-    <script src="script.js" defer></script>
+
     <style>
 /* Import Google font - Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
@@ -57,6 +57,29 @@ body .container {
   }
 }      
     </style>
+
+    <script>
+// Select relevant HTML elements
+const filterButtons = document.querySelectorAll("#filter-buttons button");
+const filterableCards = document.querySelectorAll("#filterable-cards .card");
+
+// Function to filter cards based on filter buttons
+const filterCards = (e) => {
+    document.querySelector("#filter-buttons .active").classList.remove("active");
+    e.target.classList.add("active");
+
+    filterableCards.forEach(card => {
+        // show the card if it matches the clicked filter or show all cards if "all" filter is clicked
+        if(card.dataset.name === e.target.dataset.filter || e.target.dataset.filter === "all") {
+            return card.classList.replace("hide", "show");
+        }
+        card.classList.add("hide");
+    });
+}
+
+filterButtons.forEach(button => button.addEventListener("click", filterCards));      
+    </script>    
+    
   </head>
   <body>
     <div class="container">
